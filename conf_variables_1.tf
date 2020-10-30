@@ -10,3 +10,11 @@ variable "security_group_SSH_laptop" {
   description = "The security group ID that allows ssh from my home's IP"
   default     = ["no_securiy_group_found"]
 }
+
+variable "my_secret_key" {
+  type        = string
+}
+
+variable "my_public_key" {
+  type        = string
+}
