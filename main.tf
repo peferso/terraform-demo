@@ -9,8 +9,10 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-3"
-  profile = "user1"
+  access_key = var.my_public_key
+  secret_key = var.my_secret_key
 }
+
 
 
 output "subnet_id_is" {
