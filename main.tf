@@ -32,6 +32,6 @@ resource "aws_instance" "example" {
   user_data                   = "file('script_user_data_1.sh')"
   key_name                    = "key-pair-Linux-AMI-root"
   tags = {
-    Name = "InsUserData-Terraform"
+    Name = "JenkinsInstance-Terraform"
   }
 }
