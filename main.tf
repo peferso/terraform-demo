@@ -23,15 +23,34 @@ output "security_group_chosen_is" {
   value = var.security_group_SSH_laptop
 }
 
-resource "aws_instance" "example" {
+resource "aws_instance" "vanilla-ec2" {
   ami                         = "ami-0de12f76efe134f2f"
   instance_type               = "t2.micro"
   subnet_id                   = var.my_subnet_1
   vpc_security_group_ids      = var.security_group_SSH_laptop
   associate_public_ip_address = true
-  user_data                   = file("script_user_data_1.sh")
+  user_data                   = file("user-data/ec2-vanilla-instance.sh")
   key_name                    = "key-pair-Linux-AMI-root"
   tags = {
-    Name = "JenkinsInstance-Terraform"
+    Name = "vanilla-ec2"
+    Agent = "Jenkins"
+    Terraform = "TRUE"
+    Role = "App"
+  }
+}
+
+resource "aws_instance" "database-ec2" {
+  ami                         = "ami-0de12f76efe134f2f"
+  instance_type               = "t2.micro"
+  subnet_id                   = var.my_subnet_1
+  vpc_security_group_ids      = var.security_group_SSH_laptop
+  associate_public_ip_address = true
+  user_data                   = file("user-data/ec2-database-instance.sh")
+  key_name                    = "key-pair-Linux-AMI-root"
+  tags = {
+    Name = "database-ec2"
+    Agent = "Jenkins"
+    Terraform = "TRUE"
+    Role = "Database"
   }
 }
