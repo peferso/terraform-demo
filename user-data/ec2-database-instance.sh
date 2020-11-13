@@ -38,8 +38,9 @@ sudo systemctl enable --now mysqld
 # Commands to print useful info
 PUBLIC_IP=$(curl -s ifconfig.co)
 TEMP_PASSWD_MYSQL_ROOT=$(sudo grep 'temporary password' /var/log/mysqld.log)
+MYSQLPASSWD=$(echo $TEMP_PASSWD_MYSQL_ROOT | awk '{print $NF}')
 echo 'PUBLIC_IP='$PUBLIC_IP >> /etc/environment 
-echo 'TEMP_PASSWD_MYSQL_ROOT='$TEMP_PASSWD_MYSQL_ROOT >> /etc/environment
+echo 'MYSQLPASSWD='$MYSQLPASSWD >> /etc/environment
 customfile=/etc/profile.d/custom.sh
 sudo touch $customfile
 sudo echo 'echo "   "' >> $customfile
@@ -59,7 +60,7 @@ sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo " ""The temporary mySQL password for root@localhost is:"' >> $customfile
 sudo echo 'echo "   "' >> $customfile
-sudo echo 'echo "   "$TEMP_PASSWD_MYSQL_ROOT' >> $customfile
+sudo echo 'echo "   "$MYSQLPASSWD' >> $customfile
 sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo " ================================== "' >> $customfile
 sudo echo 'echo " ################################## "' >> $customfile
