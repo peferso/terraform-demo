@@ -62,6 +62,16 @@ sudo echo 'echo " ""The temporary mySQL password for root@localhost is:"' >> $cu
 sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo "   "$MYSQLPASSWD' >> $customfile
 sudo echo 'echo "   "' >> $customfile
+sudo echo 'echo "   "' >> $customfile
+sudo echo 'echo " ""Run the following command to configure the mySQL server:"' >> $customfile
+sudo echo 'echo "   "' >> $customfile
+sudo echo 'echo "   ""sudo mysql_secure_installation -p$MYSQLPASSWD"' >> $customfile
+sudo echo 'echo "   "' >> $customfile
+sudo echo 'echo "   "' >> $customfile
+sudo echo 'echo " ""Update root password anytime from MySQL shell:"' >> $customfile
+sudo echo 'echo "   "' >> $customfile
+sudo echo 'echo "   ""mysql -uroot -p"' >> $customfile
+sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo " ================================== "' >> $customfile
 sudo echo 'echo " ################################## "' >> $customfile
 sudo echo 'echo " ================================== "' >> $customfile
