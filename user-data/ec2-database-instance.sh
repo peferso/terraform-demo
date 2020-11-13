@@ -29,8 +29,7 @@ echo " Step 1: mySQL installation begins        "
 echo "                                          "
 sudo yum update –y
 
-# Commands to print the Jenkins admin password after bash login
-# as well as other useful info
+# Commands to print useful info
 PUBLIC_IP=$(curl -s ifconfig.co)
 echo 'PUBLIC_IP='$PUBLIC_IP >> /etc/environment
 customfile=/etc/profile.d/custom.sh
