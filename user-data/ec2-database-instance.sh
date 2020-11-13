@@ -28,10 +28,18 @@ echo "                                          "
 echo " Step 1: mySQL installation begins        "
 echo "                                          "
 sudo yum update –y
+# First, we need to add the MySQL Yum repository to our Amazon Linux 2 server’s repository list.
+sudo yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+# Once the repository has been added we install MySQL 8.
+sudo yum install -y mysql-community-server
+# Start the service
+sudo systemctl enable --now mysqld
 
 # Commands to print useful info
 PUBLIC_IP=$(curl -s ifconfig.co)
-echo 'PUBLIC_IP='$PUBLIC_IP >> /etc/environment
+TEMP_PASSWD_MYSQL_ROOT=$(sudo grep 'temporary password' /var/log/mysqld.log)
+echo 'PUBLIC_IP='$PUBLIC_IP >> /etc/environment 
+echo 'TEMP_PASSWD_MYSQL_ROOT='$TEMP_PASSWD_MYSQL_ROOT >> /etc/environment
 customfile=/etc/profile.d/custom.sh
 sudo touch $customfile
 sudo echo 'echo "   "' >> $customfile
@@ -47,6 +55,11 @@ sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo " ""The instance public IP address is:"' >> $customfile
 sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo "   "$PUBLIC_IP' >> $customfile
+sudo echo 'echo "   "' >> $customfile
+sudo echo 'echo "   "' >> $customfile
+sudo echo 'echo " ""The temporary mySQL password for root@localhost is:"' >> $customfile
+sudo echo 'echo "   "' >> $customfile
+sudo echo 'echo "   "$TEMP_PASSWD_MYSQL_ROOT' >> $customfile
 sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo " ================================== "' >> $customfile
 sudo echo 'echo " ################################## "' >> $customfile
