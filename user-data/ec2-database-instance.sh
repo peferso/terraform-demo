@@ -68,7 +68,7 @@ sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo "   ""sudo mysql_secure_installation -p$MYSQLPASSWD"' >> $customfile
 sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo "   "' >> $customfile
-sudo echo 'echo " ""Update root password anytime from MySQL shell:"' >> $customfile
+sudo echo 'echo " ""Login as root user to MySQL shell:"' >> $customfile
 sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo "   ""mysql -uroot -p"' >> $customfile
 sudo echo 'echo "   "' >> $customfile
