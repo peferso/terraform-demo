@@ -41,7 +41,7 @@ sudo echo 'echo " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "' >> $customfile
 sudo echo 'echo " ================================== "' >> $customfile
 sudo echo 'echo " ################################## "' >> $customfile
 sudo echo 'echo " ================================== "' >> $customfile
-sudo echo 'echo " "" Welcome ${USER}" to the mySQL-database instance' >> $customfile
+sudo echo 'echo " "" Welcome ${USER} to the mySQL-database instance"' >> $customfile
 sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo "   "' >> $customfile
 sudo echo 'echo " ""The instance public IP address is:"' >> $customfile
