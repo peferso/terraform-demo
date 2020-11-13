@@ -29,7 +29,7 @@ resource "aws_instance" "example" {
   subnet_id                   = var.my_subnet_1
   vpc_security_group_ids      = var.security_group_SSH_laptop
   associate_public_ip_address = true
-  user_data                   = "file('script_user_data_1.sh')"
+  user_data                   = file("script_user_data_1.sh")
   key_name                    = "key-pair-Linux-AMI-root"
   tags = {
     Name = "JenkinsInstance-Terraform"
