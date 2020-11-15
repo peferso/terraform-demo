@@ -24,8 +24,9 @@ provider "aws" {
 
 
 resource "aws_security_group" "vanilla_ec2" {
+	vpc_id = "vpc-0ff79b51c20ef8673"
 	name = "vanilla-ec2-security-group"
-  description = "Allow inbound traffic for vanilla ec2 instance"
+  	description = "Allow inbound traffic for vanilla ec2 instance"
  
     egress {
         from_port = 0
@@ -36,8 +37,9 @@ resource "aws_security_group" "vanilla_ec2" {
 }
 
 resource "aws_security_group" "database_ec2" {
+	vpc_id = "vpc-0ff79b51c20ef8673"
 	name = "database-ec2-security-group"
-  description = "Allow inbound traffic for database ec2 instance"
+  	description = "Allow inbound traffic for database ec2 instance"
   
     egress {
         from_port = 0
