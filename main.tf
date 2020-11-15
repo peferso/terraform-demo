@@ -112,7 +112,7 @@ resource "aws_instance" "vanilla-ec2" {
   ami                         = "ami-0de12f76efe134f2f"
   instance_type               = "t2.micro"
   subnet_id                   = var.my_subnet_1
-  vpc_security_group_ids      = [aws_security_group.instance_ec2.id]
+  vpc_security_group_ids      = [aws_security_group.vanilla_ec2.id]
   associate_public_ip_address = true
   user_data                   = file("user-data/ec2-vanilla-instance.sh")
   key_name                    = "key-pair-Linux-AMI-root"
