@@ -95,7 +95,28 @@ resource "aws_security_group_rule" "ssh_from_vanilla_to_database_ec2" {
   security_group_id = aws_security_group.database_ec2.id
 }
 
+# rule to allow icmp-ipv4 traffic from instances to instances
 
+resource "aws_security_group_rule" "icmp_from_database_to_vanilla_ec2" {
+  type = "ingress"
+  from_port = -1
+  to_port = -1
+  protocol = "icmp"
+  source_security_group_id = aws_security_group.database_ec2.id
+  
+  security_group_id = aws_security_group.vanilla_ec2.id
+}
+
+
+resource "aws_security_group_rule" "icmp_from_vanilla_to_database_ec2" {
+  type = "ingress"
+  from_port = -1
+  to_port = -1
+  protocol = "icmp"
+  source_security_group_id = aws_security_group.vanilla_ec2.id
+  
+  security_group_id = aws_security_group.database_ec2.id
+}
 
 
 
