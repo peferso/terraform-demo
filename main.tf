@@ -119,7 +119,15 @@ resource "aws_security_group_rule" "icmp_from_vanilla_to_database_ec2" {
 }
 
 
-
+resource "aws_security_group_rule" "tcp_3306_from_vanilla_to_database_ec2" {
+  type = "ingress"
+  from_port = -1
+  to_port = 3306
+  protocol = "tcp"
+  source_security_group_id = aws_security_group.vanilla_ec2.id
+  
+  security_group_id = aws_security_group.database_ec2.id
+}
 
 
 
