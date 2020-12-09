@@ -39,7 +39,7 @@ variable "insType" {
 variable "pathToUD" {
   type        = string
   description = "The path to the folder where the user data script is. Default is relative to folder´s module"
-  default     = "path.module/user-data-db-ec2.sh"
+  default     = "Modules/EC2Database/user-data-db-ec2.sh"
 }
 
 variable "publicIP" {
