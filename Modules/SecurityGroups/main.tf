@@ -73,6 +73,16 @@ resource "aws_security_group_rule" "ssh_from_laptop_to_database_ec2" {
   security_group_id = aws_security_group.database_ec2.id
 }
 
+resource "aws_security_group_rule" "ssh_from_orchestrator_network_to_database_ec2" {
+  type = "ingress"
+  from_port = 22
+  to_port = 22
+  protocol = "tcp"
+  cidr_blocks = ["10.10.1.0/24"]
+  
+  security_group_id = aws_security_group.database_ec2.id
+}
+
 # rule to allow ssh from instances to instances
 
 resource "aws_security_group_rule" "ssh_from_database_to_vanilla_ec2" {
