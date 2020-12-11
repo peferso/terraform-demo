@@ -19,6 +19,11 @@ output "insPublicIP" {
 	value = aws_instance.database_ec2.public_ip
 }
 
+output "insPrivateIP" {
+	description = "The instance private IP address"
+	value = aws_instance.database_ec2.private_ip
+}
+
 output "insPublicDNS" {
 	description = "The instance public DNS address"
 	value = aws_instance.database_ec2.public_dns
