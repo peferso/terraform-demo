@@ -32,5 +32,5 @@ module "EC2Database" {
 module "EC2Vanilla" {
   source = "./Modules/EC2Vanilla"
   ec2SubNt = var.my_subnet_1
-  secGrpID = module.SecurityGroups.vanillaEC2SecGrID
+  secGrpID = module.SecurityGroups.clientEC2SecGrID
 }
