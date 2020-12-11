@@ -10,7 +10,7 @@ It consists of four files:
 | main.tf             | declaration of the ressource created |
 | variables.tf        | input variables and default values   |
 | outputs.tf          | output variables                     |
-| user-data-db-ec2.sh | user data script with bash instructions to be executed when EC2 instance is created |
+| user-data-va-ec2.sh | user data script with bash instructions to be executed when EC2 instance is created |
 
 Example of usage in your root module with default configuration:
 ```sh
