@@ -12,6 +12,10 @@ output "EC2Database_insPublicIP" {
   description = "Public IP of the database EC2 instance"
   value       = module.EC2Database.insPublicIP
 }
+output "EC2Database_insPrivateIP" {
+  description = "Private IP of the database EC2 instance"
+  value       = module.EC2Database.insPrivateIP
+}
 output "EC2Database_insPublicDNS" {
   description = "Public DNS of the database EC2 instance"
   value       = module.EC2Database.insPublicDNS
