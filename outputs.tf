@@ -1,6 +1,7 @@
 # + Outputs from EC2Database Module
 #   - insID (string)
 #   - insPublicIP (string)
+#   - insPrivateIP (string)
 #   - insPublicDNS (string)
 #   - insState (string)
 
