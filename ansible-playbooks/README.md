@@ -6,7 +6,7 @@ This repository contains the folders and ```*.yml``` files that are necessary fo
 
 The contents of this repository should be cloned to a linux machine with Ansible already installed.
 
-## Pre-requisites: include target host IP in Ansible inventory under group [db_server]
+## Pre-requisites: include target host IP in Ansible inventory under group [dbec2server]
 
 The target servers that will be configured running this playbook should be included in the Ansible inventory: 
 should be added to the ```/etc/ansible/hosts``` file in the Ansible server under the group
