@@ -10,22 +10,27 @@
       db_uhst: "%"
 
   tasks:
+
   - name: Update all packages
     yum:
       name: '*'
       state: latest
+
   - name: Adding mySQL server repository
     yum:
       name: https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
       state: latest
+
   - name: Install the latest version of mySQL server
     yum:
       name: mysql-community-server
       state: latest
+  
   - name: Install pip
     yum:
       name: python-pip
       state: latest
+
   - name: Install PyMySQL (required)
     pip:
       name: pymysql
@@ -37,7 +42,7 @@
   - name: Start the MySQL service
     action:  service name=mysqld state=started
 
-  - name: Copy .my.cnf file with root password credentials
+  - name: Copy my.cnf file with root password credentials
     template: src=templates/my.cnf dest=/etc/my.cnf owner=root mode=0600
 
   - name: Create the database user
