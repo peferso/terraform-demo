@@ -48,7 +48,7 @@ $ ansible-playbook db-server-setup.yml
 ```
 or
 ```sh
-$ ansible-playbook /path/to/playbook.yml --user=ec2-user
+$ ansible-playbook /path/to/playbook.yml
 ```
 
 # References
