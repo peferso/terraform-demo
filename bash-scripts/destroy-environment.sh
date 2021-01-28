@@ -11,20 +11,19 @@ HELPMSSG="
 # ========================================================
 # + Run it as follows ->
 # >
-# >   ./create-environment.sh \"Name of new environment\
+# >   ./destroy-environment.sh \"Name of existing environment\
 # >  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-# ========================================================
 "
 
 ERRMSSGA="
 # ========================================================
-# + Error message:
+# + Error message: 
 # >
-# > The environment \"${ENVNAME}\" is running
-# > The file \"${MAINDIR}/${TFFILE}\" already exists
+# > The environment \"${ENVNAME}\" is not running
+# > The file \"${MAINDIR}/${TFFILE}\" does not exists 
 # ========================================================
 "
-  
+
 if [ -z ${1} ]
 then
   echo "$HELPMSSG"
@@ -32,12 +31,14 @@ then
 fi
 
 exists=$( 2>1 ls ${MAINDIR}/${TFFILE} )
-if [ -n ${exists} ]
+if [ -z ${exists} ]
 then
  echo "${ERRMSSGA}"
  exit
 fi
 
+rm -f ${MAINDIR}/${TFFILE}
 
-cp ${TEMPLATEFILE} ${MAINDIR}/${TFFILE}
-sed -i -e "s/ENVNAME/${ENVNAME}/g" ${MAINDIR}/${TFFILE}
+cd ..
+terraform apply -auto-approve
+cd -
