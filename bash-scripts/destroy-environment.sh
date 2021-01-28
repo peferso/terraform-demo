@@ -11,7 +11,7 @@ HELPMSSG="
 # ========================================================
 # + Run it as follows ->
 # >
-# >   ./destroy-environment.sh \"Name of existing environment\
+# >   ./destroy-environment.sh \"Name of existing environment\"
 # >  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 "
 
@@ -30,7 +30,7 @@ then
   exit
 fi
 
-exists=$( 2>1 ls ${MAINDIR}/${TFFILE} )
+exists=$( 2>/dev/null ls ${MAINDIR}/${TFFILE} )
 if [ -z ${exists} ]
 then
  echo "${ERRMSSGA}"

@@ -31,7 +31,7 @@ then
   exit
 fi
 
-exists=$( 2>1 ls ${MAINDIR}/${TFFILE} )
+exists=$( 2>/dev/null ls ${MAINDIR}/${TFFILE} )
 if [ -z ${exists} ]
 then
  echo "File template ${MAINDIR}/${TFFILE} does not exists"
