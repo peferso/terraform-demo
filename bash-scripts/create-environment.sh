@@ -11,7 +11,7 @@ HELPMSSG="
 # ========================================================
 # + Run it as follows ->
 # >
-# >   ./create-environment.sh \"Name of new environment\
+# >   ./create-environment.sh \"Name of new environment\"
 # >  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # ========================================================
 "
