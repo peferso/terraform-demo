@@ -23,3 +23,9 @@ variable "my_secret_key" {
 variable "my_public_key" {
   type        = string
 }
+
+variable "environmentName" {
+  type        = string
+  description = "The value of the tag <<Environment>> of EC2 instances"
+  default     = "Standard"
+}

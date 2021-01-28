@@ -35,6 +35,7 @@ resource "aws_instance" "vanilla_ec2" {
   user_data                   =  file(var.pathToUD)
   key_name                    =  var.keyName
   tags = {
+    Environment = var.environmentName
     Name = "vanilla_ec2"
     Agent = "Jenkins"
     Terraform = "TRUE"

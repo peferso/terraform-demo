@@ -2,12 +2,14 @@ module "EC2Database_ENVNAME" {
   source = "./Modules/EC2Database"
   ec2SubNt = var.my_subnet_1
   secGrpID = module.SecurityGroups.serverEC2SecGrID
+  environmentName = "ENVNAME"
 }
 
 module "EC2Vanilla_ENVNAME" {
   source = "./Modules/EC2Vanilla"
   ec2SubNt = var.my_subnet_1
   secGrpID = module.SecurityGroups.clientEC2SecGrID
+  environmentName = "ENVNAME"
 }
 
 # + Outputs from EC2Database_ENVNAME Module

@@ -5,7 +5,7 @@ TEMPLATESDIR="../environment-template/"
 TEMPLATE="environment"
 TEMPLATEFILE="${TEMPLATESDIR}/${TEMPLATE}.txt"
 TFFILE="${TEMPLATE}_${ENVNAME}.tf"
-MAINDIR="../"
+MAINDIR=".."
 
 HELPMSSG="
 # ========================================================
@@ -32,12 +32,30 @@ then
 fi
 
 exists=$( 2>1 ls ${MAINDIR}/${TFFILE} )
-if [ -n ${exists} ]
+if [ -z ${exists} ]
 then
+ echo "File template ${MAINDIR}/${TFFILE} does not exists"
+else
  echo "${ERRMSSGA}"
+ echo " "
+ echo "Current *tf files:"
+ echo " "
+ ls -lrth .. | grep -i tf
  exit
 fi
 
-
+echo "... Creating template"
 cp ${TEMPLATEFILE} ${MAINDIR}/${TFFILE}
 sed -i -e "s/ENVNAME/${ENVNAME}/g" ${MAINDIR}/${TFFILE}
+
+cd ..
+echo "... updating modules"
+terraform init
+
+echo "... applying changes"
+terraform apply -auto-approve
+
+echo ""
+echo "Infrastructure created."
+echo ""
+cd -

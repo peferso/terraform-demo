@@ -34,6 +34,9 @@ exists=$( 2>1 ls ${MAINDIR}/${TFFILE} )
 if [ -z ${exists} ]
 then
  echo "${ERRMSSGA}"
+ echo "Current *tf files:"
+ echo " "
+ ls -lrth .. | grep -i tf
  exit
 fi
 
