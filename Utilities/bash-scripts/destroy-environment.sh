@@ -36,12 +36,12 @@ then
  echo "${ERRMSSGA}"
  echo "Current *tf files:"
  echo " "
- ls -lrth .. | grep -i tf
+ ls -lrth ${MAINDIR} | grep -i tf
  exit
 fi
 
 rm -f ${MAINDIR}/${TFFILE}
 
-cd ..
+cd ${MAINDIR}/
 terraform apply -auto-approve
 cd -
