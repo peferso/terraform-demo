@@ -5,7 +5,7 @@ TEMPLATESDIR="../environment-template/"
 TEMPLATE="environment"
 TEMPLATEFILE="${TEMPLATESDIR}/${TEMPLATE}.txt"
 TFFILE="${TEMPLATE}_${ENVNAME}.tf"
-MAINDIR=".."
+MAINDIR="../.."
 
 HELPMSSG="
 # ========================================================
