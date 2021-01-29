@@ -13,6 +13,7 @@ HELPMSSG="
 # >
 # >   ./destroy-environment.sh \"Name of existing environment\"
 # >  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# ========================================================
 "
 
 ERRMSSGA="
