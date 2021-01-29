@@ -52,3 +52,9 @@ variable "keyName" {
   description = "The name of the key pair used to ssh access the EC2 instance"
   default     = "key-pair-Linux-AMI-root"
 }
+
+variable "environmentName" {
+  type        = string
+  description = "The environment of the instance"
+  default     = "Standard"
+}
