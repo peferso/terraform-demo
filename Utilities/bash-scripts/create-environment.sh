@@ -90,16 +90,16 @@ else
   exit
 fi
 
-echo ${STEPINFO_1}
+echo "${STEPINFO_1}"
 cp ${TEMPLATEFILE} ${MAINDIR}/${TFFILE}
 sed -i -e "s/ENVNAME/${ENVNAME}/g" ${MAINDIR}/${TFFILE}
 
-echo ${STEPINFO_2}
+echo "${STEPINFO_2}"
 cd ${MAINDIR}/
 terraform init
 
-echo ${STEPINFO_3}
+echo "${STEPINFO_3}"
 terraform apply -auto-approve
 
-echo ${STEPINFO_4}
+echo "${STEPINFO_4}"
 cd -
