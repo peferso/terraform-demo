@@ -60,46 +60,60 @@ STEPINFO_4="
 
 
 
+readInput() {
+  if [ -z "${1}" ]
+  then
+    echo "$HELPMSSG"
+    exit
+  fi
+}
 
-if [ -z "${1}" ]
-then
-  echo "$HELPMSSG"
-  exit
-fi
+checkEnvNameFormat() {
+  if [[ "${ENVNAME}" =~ ^[a-zA-Z0-9_-]+$ ]]
+  then
+    echo "${ENVNAME}"
+  else
+    echo "${ERRMSSGA}"
+    exit
+  fi
+}
 
-if [[ "${ENVNAME}" =~ ^[a-zA-Z0-9_-]+$ ]]
-then
-  echo "${ENVNAME}"
-else
-  echo "${ERRMSSGA}"
-  exit
-fi
+checkEnvExistence() {
+  exists=$( 2>/dev/null ls ${MAINDIR}/${TFFILE} )
+  if [ -z "${exists}" ]
+  then
+    echo "File template ${MAINDIR}/${TFFILE} does not exists"
+  else
+    echo "${ERRMSSGB}"
+    echo " "
+    echo "Current *tf files:"
+    echo " "
+    ls -lrth ${MAINDIR} | grep -i tf
+    exit
+  fi
+}
 
-exit
+createEnvironment() {
+  echo "${STEPINFO_1}"
+  cp ${TEMPLATEFILE} ${MAINDIR}/${TFFILE}
+  sed -i -e "s/ENVNAME/${ENVNAME}/g" ${MAINDIR}/${TFFILE}
+  
+  echo "${STEPINFO_2}"
+  cd ${MAINDIR}/
+  terraform init
+  
+  echo "${STEPINFO_3}"
+  terraform apply -auto-approve
+  
+  echo "${STEPINFO_4}"
+  cd -
+}
 
-exists=$( 2>/dev/null ls ${MAINDIR}/${TFFILE} )
-if [ -z "${exists}" ]
-then
-  echo "File template ${MAINDIR}/${TFFILE} does not exists"
-else
-  echo "${ERRMSSGB}"
-  echo " "
-  echo "Current *tf files:"
-  echo " "
-  ls -lrth ${MAINDIR} | grep -i tf
-  exit
-fi
+readInput ${1}
 
-echo "${STEPINFO_1}"
-cp ${TEMPLATEFILE} ${MAINDIR}/${TFFILE}
-sed -i -e "s/ENVNAME/${ENVNAME}/g" ${MAINDIR}/${TFFILE}
+checkEnvNameFormat
 
-echo "${STEPINFO_2}"
-cd ${MAINDIR}/
-terraform init
+checkEnvExistence
 
-echo "${STEPINFO_3}"
-terraform apply -auto-approve
+createEnvironment
 
-echo "${STEPINFO_4}"
-cd -
