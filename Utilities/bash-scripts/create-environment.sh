@@ -109,7 +109,7 @@ createEnvironment() {
   cd -
 }
 
-readInput ${1}
+readInput ${ENVNAME}
 
 checkEnvNameFormat
 
