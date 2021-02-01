@@ -36,7 +36,7 @@ resource "aws_instance" "database_ec2" {
   key_name                    =  var.keyName
   tags = {
     Environment = var.environmentName
-    Name = "database_ec2"
+    Name = join("-", [var.environmentName, "database_ec"])
     Agent = "Jenkins"
     Terraform = "TRUE"
     Role = "Database"
