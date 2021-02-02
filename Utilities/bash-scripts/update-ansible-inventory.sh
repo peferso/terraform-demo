@@ -42,14 +42,7 @@ find_ips () {
     partRight=$( echo  "${partRight//\"/}"  )
     modNames+=( ${partLeftt} );
     insPrvIP+=( ${partRight} );
-#    echo "Line:"
-#    echo "$line"
-#    echo "${partLeftt}"
-#    echo "${partRight}"
-#    echo " "
   done <<< "${outputList}"
-#  echo " ${modNames[@]} "
-#  echo " ${insPrvIP[@]} "
   cd -
 }
 
