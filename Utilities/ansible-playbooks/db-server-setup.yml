@@ -117,28 +117,6 @@
     failed_when:
       - '"ERROR" in alterPass.stdout'
 
-  - name: Test whether bind-address parameter exists
-    shell:
-      cmd: sudo cat /etc/my.cnf | grep "bind-address"
-    register: bindaddressExists
-    failed_when:
-      - '"No such file or directory" in bindaddressExists.stdout'
-
-  - name: Print existence bind-address [I]
-    ansible.builtin.debug:
-      msg: "The parameter bind-address is not defined in /etc/my.cnf"
-    when: bindaddressExists.stdout == ""
-
-  - name: Print existence bind-address [II]
-    ansible.builtin.debug:
-      msg: "The parameter bind-address is already defined in /etc/my.cnf"
-    when: bindaddressExists.stdout != ""
-
-  - name: Add bind-address parameter to my.cnf to allow remote connections to the database
-    shell:
-      cmd: sudo echo "bind-address=0.0.0.0">> /etc/my.cnf
-    when: bindaddressExists.stdout.find('bind-address') == -1
-
   - name: Restart the MySQL service
     systemd:
       name: mysqld
