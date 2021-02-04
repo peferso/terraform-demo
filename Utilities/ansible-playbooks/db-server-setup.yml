@@ -6,7 +6,6 @@
   remote_user: ec2-user
   vars:
 #      ansible_python_interpreter: "/usr/bin/python3"
-      ANSIBLE_CONFIG: "./ansible.cfg"
       db_name: "db1"
       db_user: "ec2-dbuser"
       db_pass: "Perr0_Pat0"
