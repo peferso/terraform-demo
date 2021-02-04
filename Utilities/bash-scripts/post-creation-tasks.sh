@@ -3,7 +3,7 @@
 
 PLAYBOOKSDIR="/home/ec2-user/tf_templates/Utilities/ansible-playbooks"
 DBSETUP="db-server-setup.yml"
-ANSCONFIGFILE="ansible.cfg"
+DBANSCONFIGFILE="db-server-setup.cfg"
 CFGVAR="ANSIBLE_CONFIG"
 
 create_environment_variable_ansiblecfg_dir() {
@@ -41,7 +41,7 @@ run_ansible_playbook() {
 
 # Main
 
-create_environment_variable_ansiblecfg_dir "${ANSCONFIGFILE}"
+create_environment_variable_ansiblecfg_dir "${DBANSCONFIGFILE}"
 
 run_ansible_playbook "${DBSETUP}"
 
