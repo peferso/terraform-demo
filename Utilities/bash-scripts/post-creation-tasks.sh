@@ -4,20 +4,28 @@
 PLAYBOOKSDIR="/home/ec2-user/tf_templates/Utilities/ansible-playbooks"
 DBSETUP="db-server-setup.yml"
 ANSCONFIGFILE="ansible.cfg"
+CFGVAR="ANSIBLE_CONFIG"
 
 create_environment_variable_ansiblecfg_dir() {
   MSSGENV="
   # ========================================================
   # + ... Using .cfg file:
   # > ${PLAYBOOKSDIR}/${1}
+  # + ... Creating environment variable: ${CFGVAR}
   # ========================================================
   "
   echo "${MSSGENV}"
-  export ANSIBLE_CONFIG=${PLAYBOOKSDIR}/${1}
+  export ${CFGVAR}=${PLAYBOOKSDIR}/${1}
 }
 
 delete_environment_variable_ansiblecfg_dir() {
-  unset ANSIBLE_CONFIG
+  MSSGENV="
+  # ========================================================
+  # + ... deleting environment variable: ${CFGVAR}
+  # ========================================================
+  "
+  echo "${MSSGENV}"
+  unset ${CFGVAR} 
 }
 
 run_ansible_playbook() {
