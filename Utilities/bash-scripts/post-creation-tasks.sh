@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-PLAYBOOKSDIR="/home/ec2-user/tf_templates/Utilities/ansible-playbooks"
+PLAYBOOKSDIR="../ansible-playbooks"
 DBSETUP="db-server-setup.yml"
 DBANSCONFIGFILE="db-server-setup.cfg"
 CFGVAR="ANSIBLE_CONFIG"
