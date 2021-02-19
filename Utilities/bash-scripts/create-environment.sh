@@ -71,7 +71,7 @@ readInput() {
 checkEnvNameFormat() {
   if [[ "${ENVNAME}" =~ ^[a-zA-Z0-9_-]+$ ]]
   then
-    echo "${ENVNAME}"
+    echo "Environment name: ${ENVNAME} has the correct format"
   else
     echo "${ERRMSSGA}"
     exit
