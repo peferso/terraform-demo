@@ -1,8 +1,8 @@
-module "stop_ec2_instance_ENVNAME" {
+module "start_ec2_instance_ENVNAME" {
   source                         = "diodonfrost/lambda-scheduler-stop-start/aws"
-  name                           = "ec2_stop_ENVNAME"
+  name                           = "ec2_start_ENVNAME"
   cloudwatch_schedule_expression = "cron(RSCHEDULE)"
-  schedule_action                = "stop"
+  schedule_action                = "start"
   autoscaling_schedule           = "false"
   ec2_schedule                   = "true"
   rds_schedule                   = "false"
