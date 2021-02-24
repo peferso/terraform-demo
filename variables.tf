@@ -29,3 +29,9 @@ variable "environmentName" {
   description = "The value of the tag <<Environment>> of EC2 instances"
   default     = "Standard"
 }
+
+variable "number_of_environments" {
+  description = "Number of client-server pairs to be created"
+  type        = number
+  default     = 1
+}

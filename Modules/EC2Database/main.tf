@@ -27,6 +27,7 @@
 # ================================================================================ #
 
 resource "aws_instance" "database_ec2" {
+  count                       =  var.number_of_environments
   ami                         =  var.amiType
   instance_type               =  var.insType
   subnet_id                   =  var.ec2SubNt
@@ -35,8 +36,8 @@ resource "aws_instance" "database_ec2" {
   user_data                   =  file(var.pathToUD)
   key_name                    =  var.keyName
   tags = {
-    Environment = var.environmentName
-    Name = join("-", [var.environmentName, "database_ec"])
+    Environment = join("-", [var.environmentName, count.index])
+    Name = join("-", [var.environmentName, count.index, "database_ec"])
     Agent = "Jenkins"
     Terraform = "TRUE"
     Role = "Database"

@@ -58,12 +58,3 @@ output "EC2Vanilla_insState" {
 #   - clientEC2SecGrID (string)
 #   - serverEC2SecGrID (string)
 
-output "secGroup_clientEC2" {
-  description = "ID of vanilla EC2 security group"
-  value       = module.SecurityGroups.clientEC2SecGrID
-}
-
-output "secGroup_serverEC2" {
-  description = "ID of database EC2 security group"
-  value       = module.SecurityGroups.serverEC2SecGrID
-}

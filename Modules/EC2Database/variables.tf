@@ -58,3 +58,9 @@ variable "environmentName" {
   description = "The environment of the instance"
   default     = "Standard"
 }
+
+variable "number_of_environments" {
+  type        = number
+  description = "The number of EC2 instances to be created"
+  default     = 1
+}
