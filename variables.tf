@@ -4,6 +4,12 @@ variable "my_region" {
   default     = "no_region_found"
 }
 
+variable "my_vpc_id" {
+  type        = string
+  description = "The VPC id where resources will be created"
+  default     = "no_vpc_id_found"
+}
+
 variable "my_subnet_1" {
   type        = string
   description = "The public subnet 1 in  my AWS VPC"
