@@ -97,23 +97,45 @@ resource "aws_route_table_association" "RT-IG-Association" {
   route_table_id = aws_route_table.Public-Subnet-RT.id
 }
 
-#resource "aws_eip" "Nat-Gateway-EIP" {
-#  depends_on = [
-#    aws_route_table_association.RT-IG-Association
-#  ]
-#  vpc = true
-#}
+resource "aws_eip" "Nat-Gateway-EIP" {
+  depends_on = [
+    aws_route_table_association.RT-IG-Association
+  ]
+  vpc = true
+}
 
-#resource "aws_nat_gateway" "Nat-Gateway" {
-#  depends_on = [
-#    aws_eip.Nat-Gateway-EIP
-#  ]
-#  allocation_id = aws_eip.Nat-Gateway-EIP.id
-#  subnet_id     = var.my_subnet_1
-#  tags = {
-#    Name = "Nat-Gateway_Environments"
-#  }
-#}
+resource "aws_nat_gateway" "Nat-Gateway" {
+  depends_on = [
+    aws_eip.Nat-Gateway-EIP
+  ]
+  allocation_id = aws_eip.Nat-Gateway-EIP.id
+  subnet_id      = aws_subnet.subnet1.id 
+  tags = {
+    Name = "Nat-Gateway_Environments"
+  }
+}
+
+resource "aws_route_table" "NAT-Gateway-RT" {
+  depends_on = [
+    aws_nat_gateway.Nat-Gateway
+  ]
+  vpc_id = aws_vpc.environments_vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.Nat-Gateway.id
+  }
+  tags = {
+    Name = "Route Table for NAT Gateway"
+  }
+}
+
+resource "aws_route_table_association" "Nat-Gateway-RT-Association" {
+  depends_on = [
+    aws_route_table.NAT-Gateway-RT
+  ]
+  subnet_id      = aws_subnet.subnet1.id
+  route_table_id = aws_route_table.NAT-Gateway-RT.id
+}
 
 module "SecurityGroups" {
   source = "./Modules/SecurityGroups"
