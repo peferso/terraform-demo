@@ -171,8 +171,8 @@ resource "aws_security_group_rule" "http_into_database_ec2" {
 
 resource "aws_security_group_rule" "https_into_vanilla_ec2" {
   type = "ingress"
-  from_port = 8080
-  to_port = 8080
+  from_port = 443
+  to_port = 443
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 
@@ -181,8 +181,8 @@ resource "aws_security_group_rule" "https_into_vanilla_ec2" {
 
 resource "aws_security_group_rule" "https_into_database_ec2" {
   type = "ingress"
-  from_port = 8080
-  to_port = 8080
+  from_port = 443
+  to_port = 443
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 

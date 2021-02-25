@@ -41,6 +41,21 @@ resource "aws_subnet" "subnet1" {
   }
 }
 
+resource "aws_subnet" "subnet2" {
+  depends_on = [
+    aws_vpc.environments_vpc
+  ]
+  vpc_id = aws_vpc.environments_vpc.id
+  cidr_block = "10.20.2.0/24"
+  availability_zone = "eu-west-3b"
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "Private subnet2-Environments vpc"
+  }
+}
+
+
 resource "aws_vpc_peering_connection" "peering_orchestrator_and_environment_vpcs" {
   peer_vpc_id   = aws_vpc.environments_vpc.id
   vpc_id        = var.my_vpc_id
@@ -84,7 +99,6 @@ resource "aws_route" "r" {
   route_table_id            = "rtb-0d26983a12b5a2283"
   destination_cidr_block    = "10.20.0.0/16"
   vpc_peering_connection_id = aws_vpc_peering_connection.peering_orchestrator_and_environment_vpcs.id
-#  depends_on                = [aws_route_table.testing]
 }
 
 resource "aws_route_table_association" "RT-IG-Association" {
@@ -96,6 +110,16 @@ resource "aws_route_table_association" "RT-IG-Association" {
   subnet_id      = aws_subnet.subnet1.id 
   route_table_id = aws_route_table.Public-Subnet-RT.id
 }
+
+#resource "aws_route_table_association" "RT-IG-Association2" {
+#  depends_on = [
+#    aws_vpc.environments_vpc,
+#    aws_subnet.subnet2,
+#    aws_route_table.Public-Subnet-RT
+#  ]
+#  subnet_id      = aws_subnet.subnet2.id
+#  route_table_id = aws_route_table.Public-Subnet-RT.id
+#}
 
 resource "aws_eip" "Nat-Gateway-EIP" {
   depends_on = [
@@ -124,6 +148,10 @@ resource "aws_route_table" "NAT-Gateway-RT" {
     cidr_block = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.Nat-Gateway.id
   }
+  route {
+    cidr_block = "10.10.0.0/16"
+    vpc_peering_connection_id = aws_vpc_peering_connection.peering_orchestrator_and_environment_vpcs.id
+  }
   tags = {
     Name = "Route Table for NAT Gateway"
   }
@@ -133,7 +161,7 @@ resource "aws_route_table_association" "Nat-Gateway-RT-Association" {
   depends_on = [
     aws_route_table.NAT-Gateway-RT
   ]
-  subnet_id      = aws_subnet.subnet1.id
+  subnet_id      = aws_subnet.subnet2.id
   route_table_id = aws_route_table.NAT-Gateway-RT.id
 }
 
@@ -144,14 +172,14 @@ module "SecurityGroups" {
 
 module "EC2Database" {
   source = "./Modules/EC2Database"
-  ec2SubNt = aws_subnet.subnet1.id
+  ec2SubNt = aws_subnet.subnet2.id
   secGrpID = module.SecurityGroups.serverEC2SecGrID
   environmentName = var.environmentName
 }
   
 module "EC2Vanilla" {
   source = "./Modules/EC2Vanilla"
-  ec2SubNt = aws_subnet.subnet1.id
+  ec2SubNt = aws_subnet.subnet2.id
   secGrpID = module.SecurityGroups.clientEC2SecGrID
   environmentName = var.environmentName
 }
