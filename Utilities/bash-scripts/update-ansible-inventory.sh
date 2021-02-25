@@ -30,23 +30,12 @@ confirm() {
 
 find_ips () {
   cd ${MAINDIR}
-  numberOfEnvironments="$(cat terraform.tfvars | grep -i number_of_environments)"
-  numberOfEnvironments=${numberOfEnvironments#*=}
-  numberOfEnvironments=${numberOfEnvironments//[ $'\001'-$'\037']}
-  outputList="$(terraform output | grep -i -A $((numberOfEnvironments+0)) 'PrivateIP')"
+  outputList="$(terraform output | grep -i privateIp)"
   delimiter="="
   modNames=();
   insPrvIP=();
   while IFS= read -r line
   do
-    echo $line
-    if [[ "$line" =~ ^[=]+$ ]]
-    then
-      line=${line%"_"*}
-      line=${line//[ $'\001'-$'\037']}
-      echo $line
-    fi
-    exit
     partLeftt=${line%%"$delimiter"*}
     partLeftt=${partLeftt%"_"*}
     partRight=${line#*"$delimiter"}
@@ -76,4 +65,3 @@ confirm $1
 find_ips
 
 add_each_instance_in_1_group
-

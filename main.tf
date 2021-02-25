@@ -25,7 +25,6 @@ module "SecurityGroups" {
 
 module "EC2Database" {
   source = "./Modules/EC2Database"
-  number_of_environments = var.number_of_environments
   ec2SubNt = var.my_subnet_1
   secGrpID = module.SecurityGroups.serverEC2SecGrID
   environmentName = var.environmentName
@@ -33,7 +32,6 @@ module "EC2Database" {
   
 module "EC2Vanilla" {
   source = "./Modules/EC2Vanilla"
-  number_of_environments = var.number_of_environments
   ec2SubNt = var.my_subnet_1
   secGrpID = module.SecurityGroups.clientEC2SecGrID
   environmentName = var.environmentName
